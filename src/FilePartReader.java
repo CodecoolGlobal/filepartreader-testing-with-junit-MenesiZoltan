@@ -14,7 +14,6 @@ public class FilePartReader {
 
     }
 
-
     public void setup(String filePath, int fromLine, int toLine) throws IllegalArgumentException {
         if (toLine < fromLine || fromLine < 1) {
             throw new IllegalArgumentException();
