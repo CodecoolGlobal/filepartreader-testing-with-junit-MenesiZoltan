@@ -43,9 +43,9 @@ public class FilePartReader {
         String[] separateLines = lines.split("\n");
         StringBuilder result = new StringBuilder();
 
-        for (int i = fromLine -1; i <= toLine; i++) {
+        for (int i = fromLine -1; i < toLine; i++) {
             result.append(separateLines[i]);
-            result.append(" ");
+            result.append("\n");
         }
 
         return result.toString();

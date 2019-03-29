@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FilePartReaderTest {
 
+    static final FilePartReader testReader = new FilePartReader();
+
     @Test
     public void testSetupInvalidPath() {
-        FilePartReader testReader = new FilePartReader();
         assertThrows(IllegalArgumentException.class, () ->
         {testReader.setup("resources/material/hubblebubble/.txt",
                 15, 10);});
@@ -14,7 +15,6 @@ class FilePartReaderTest {
 
     @Test
     public void testSetupFromLineIsZero() {
-        FilePartReader testReader = new FilePartReader();
         assertThrows(IllegalArgumentException.class, () ->
         {testReader.setup("resources/material.txt",
                 0, 10);});
@@ -22,7 +22,6 @@ class FilePartReaderTest {
 
     @Test
     public void testSetupFromLineIsNegative() {
-        FilePartReader testReader = new FilePartReader();
         assertThrows(IllegalArgumentException.class, () ->
         {testReader.setup("resources/material.txt",
                 -15, 10);});
@@ -30,7 +29,6 @@ class FilePartReaderTest {
 
     @Test
     public void testSetupToLineZero() {
-        FilePartReader testReader = new FilePartReader();
         assertThrows(IllegalArgumentException.class, () ->
         {testReader.setup("resources/material.txt",
                 2, 0);});
@@ -38,10 +36,45 @@ class FilePartReaderTest {
 
     @Test
     public void testSetupToLineNegative() {
-        FilePartReader testReader = new FilePartReader();
         assertThrows(IllegalArgumentException.class, () ->
         {testReader.setup("resources/material.txt",
                 2, -10);});
+    }
+
+    @Test
+    void testReadReturnType() {
+        testReader.setup("resources/material.txt",
+                1, 10);
+        assertTrue(testReader.read() instanceof String);
+    }
+
+    @Test
+    void testReadReturnsNotNull() {
+        testReader.setup("resources/material.txt",
+                1, 10);
+        assertNotNull(testReader.read());
+    }
+
+    @Test
+    void testReadLinesReturnType() {
+        testReader.setup("resources/material.txt",
+                1, 10);
+        assertTrue(testReader.readLines() instanceof String);
+    }
+
+
+    @Test
+    void testReadLinesNotNull() {
+        testReader.setup("resources/material.txt",
+                1, 10);
+        assertNotNull(testReader.readLines());
+    }
+
+    @Test
+    void testReadLinesCorrectNumberOfLines () {
+        testReader.setup("resources/material.txt",
+                1, 3);
+        assertEquals(3, testReader.readLines().split("\n").length);
     }
 
 }
