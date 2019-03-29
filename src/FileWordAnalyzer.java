@@ -10,13 +10,18 @@ public class FileWordAnalyzer {
     }
 
     public List getWordsOrderedAlphabetically() {
-        String[] words = reader.readLines().split(" ");
+        String readLines = reader.readLines().replaceAll("\n", " ");
+        String[] words = readLines.split(" ");
         Arrays.sort(words);
+        System.out.println(Arrays.asList(words));
+
         return Arrays.asList(words);
     }
 
     public List getWordsContainingSubstring (String subString) {
-        String[] words = reader.readLines().split(" ");
+        String readLines = reader.readLines().replaceAll("\n", " ");
+        String[] words = readLines.split(" ");
+
         StringBuilder temp = new StringBuilder();
 
         for (String word : words) {
@@ -25,7 +30,12 @@ public class FileWordAnalyzer {
                 temp.append(" ");
             }
         }
-        return Arrays.asList(temp.toString().split(" "));
+
+        if (temp.toString().length() == 0) {
+            return null;
+        } else {
+            return Arrays.asList(temp.toString().split(" "));
+        }
     }
 
     public List getStringsWhichPallindrome() {
