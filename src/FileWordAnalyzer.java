@@ -39,7 +39,9 @@ public class FileWordAnalyzer {
     }
 
     public List getStringsWhichPallindrome() {
-        String[] words = reader.readLines().split(" ");
+        String readLines = reader.readLines().replaceAll("\n", " ");
+        String[] words = readLines.split(" ");
+
         StringBuilder tempResult = new StringBuilder();
         StringBuilder tempReverser = new StringBuilder();
 
@@ -50,6 +52,11 @@ public class FileWordAnalyzer {
             }
             tempReverser.delete(0, tempReverser.length()-1);
         }
-        return Arrays.asList(tempResult.toString().split(" "));
+
+        if (tempResult.toString().length() == 0) {
+            return null;
+        } else {
+            return Arrays.asList(tempResult.toString().split(" "));
+        }
     }
 }

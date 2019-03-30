@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +41,36 @@ class FileWordAnalyzerTest {
                 1, 2);
         List expectedResult = null;
         assertEquals(expectedResult, testAnalyzer.getWordsContainingSubstring("x"));
+    }
+
+    @Test
+    void testPallindromeReturnTypeIsList () {
+        testReader.setup("resources/testingfile.txt",
+                4, 4);
+        assertTrue(testAnalyzer.getStringsWhichPallindrome() instanceof List);
+    }
+
+    @Test
+    void testPallindromeIsResultCorrect() {
+        testReader.setup("resources/testingfile.txt",
+                4, 4);
+        List expectedResult = Arrays.asList("xxx", "ttt", "rrr", "qqq", "lll");
+        assertEquals(expectedResult, testAnalyzer.getStringsWhichPallindrome());
+    }
+
+    @Test
+    void testPallindromeReturnsNull() {
+        testReader.setup("resources/testingfile.txt",
+                1, 3);
+        List expectedResult = null;
+        assertEquals(expectedResult, testAnalyzer.getStringsWhichPallindrome());
+    }
+
+    @Test
+    void testFileReaderHasIllegalFilePath() {
+        testReader.setup("resources/testingfile/invalidpath.txt",
+                1, 3);
+        assertThrows(IllegalArgumentException.class, testAnalyzer::getStringsWhichPallindrome);
     }
 
 }

@@ -38,8 +38,9 @@ class FilePartReaderTest {
     public void testSetupToLineNegative() {
         assertThrows(IllegalArgumentException.class, () ->
         {testReader.setup("resources/material.txt",
-                2, -10);});
+                2, -15);});
     }
+
 
     @Test
     void testReadReturnType() {
